@@ -1,22 +1,39 @@
-import { CheckCircle, Circle, Trash } from "phosphor-react";
+import { Circle, Trash } from "phosphor-react";
+import { BsFillCheckCircleFill } from "react-icons/bs";
+import { ITask } from "../../App";
 import { Container } from "./styles";
 
 interface TaskProps {
   id?: string;
-  content: string;
-  isCheck: boolean;
+  task: ITask;
+  deleteTask: (taskID: string) => void;
+  changeCheck: (taskID: string) => void;
 }
 
-export function Task({content, isCheck }: TaskProps) {
+export function Task({ task, deleteTask, changeCheck}: TaskProps) {
   return (
     <Container>
-      <button>
-        <Circle size={24} color="#4EA8DE" />
-      </button>
-      <span>
-        {content}
-      </span>
-      <button >
+      {(task.isCheck) ? (
+        <>
+        <button>
+            <BsFillCheckCircleFill
+              className="isCheck"
+              size={17.45}
+              color="#5E60CE"
+            />
+          </button>
+          <span className="isCheck">{task.content}</span>
+        </>
+      ) : (
+        <>
+          <button onClick={() => changeCheck(task.id)}>
+            <Circle size={17.45} color="#4EA8DE"/>
+          </button>
+          <span>{task.content}</span>
+        </>
+      )}
+
+      <button onClick={() => deleteTask(task.id)}>
         <Trash className="trash" size={24} color="#808080" />
       </button>
     </Container>

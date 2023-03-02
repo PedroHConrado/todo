@@ -4,10 +4,12 @@ import { Task } from "../Task";
 import { ITask } from "../../App";
 
 interface DashboardProps {
+  deleteTask: (taskID: string) => void;
+  changeCheck: (taskID: string) => void;
   tasks: ITask[];
 }
 
-export function Dashboard({ tasks }: DashboardProps) {
+export function Dashboard({ tasks, deleteTask, changeCheck }: DashboardProps) {
   return (
     <Container>
       <header>
@@ -22,23 +24,24 @@ export function Dashboard({ tasks }: DashboardProps) {
       </header>
       <main>
         {(tasks.length < 1) ? (
-          <>
+          <div className="no-task">
             <img src={Clipboard} alt="Clipboard" />
             <h3>Voce ainda não tem tarefas cadastradas</h3>
             <p>Crie tarefas e organize seus itens a fazer</p>
-          </>
+          </div>
         ) : (
-          <>
-            {tasks.map((task) => {
+          <div className="with-task">
+            {tasks.map(task => {
               return (
                 <Task
                   key={task.id}
-                  content={task.content}
-                  isCheck={task.isCheck}
+                  task={task}
+                  deleteTask={deleteTask}
+                  changeCheck={changeCheck}
                 />
               );
             })}
-          </>
+          </div>
         )}
       </main>
     </Container>

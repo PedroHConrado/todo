@@ -5,7 +5,8 @@ import { Task } from "./components/Task";
 
 import { GlobalStyle } from "./styles/global";
 
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
+import { useState } from "react";
 
 export interface ITask {
   id: string;
@@ -13,33 +14,49 @@ export interface ITask {
   isCheck: boolean;
 }
 
-const tasks: ITask[] = [
-  {
-    id: uuidv4(),
-    content: 'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.',
-    isCheck: true
-  },
-  {
-    id: uuidv4(),
-    content: 'Acordar 6h',
-    isCheck: true
-  },
-  {
-    id: uuidv4(),
-    content: 'Estudar javascript',
-    isCheck: true
-  }
-]
+const tasks: ITask[] = [];
 
 function App() {
+  const [newTasks, setNewTasks] = useState<ITask[]>([]);
+
+  function createNewTask(task: string) {
+    setNewTasks([...newTasks, {
+      id: uuidv4(),
+      content: task,
+      isCheck: false
+    }])
+  }
+
+  function deleteTask(taskID: string) {
+    const tasksWithoutDeletedOne = newTasks.filter(task => {
+      return task.id !== taskID
+    })
+    console.log(tasksWithoutDeletedOne)
+    setNewTasks(tasksWithoutDeletedOne)
+  }
+
+  function changeCheck(taskID: string) {
+    const completedTasks = newTasks.map(task => {
+      if(task.id === taskID){
+        return {
+          ...task, 
+          isCheck: !task.isCheck
+        }
+      }
+      return task;
+    });
+    console.log(completedTasks)
+    setNewTasks(completedTasks);
+  }
+
   return (
     <>
       <GlobalStyle />
       <Header />
-      <Input />
-      <Dashboard tasks={tasks}/>
+      <Input addTask={createNewTask} />
+      <Dashboard changeCheck={changeCheck} deleteTask={deleteTask} tasks={newTasks} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -24,6 +24,11 @@ export const Container =styled.div`
     font-size: 0.875rem;
   }
 
+  .isCheck {
+      color: #808080;
+      text-decoration: line-through;
+  }
+
   button {
     width: 24px;
     height: 24px;
@@ -33,7 +38,5 @@ export const Container =styled.div`
     background: transparent;
 
     cursor: pointer;
-
-
   }
 `

@@ -2,9 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 46rem;
-  height: 18rem;
-
-  margin: 10rem auto;
+  height: 35rem;
+  margin: 10rem auto 0;
 
   display: flex;
   flex-direction: column;
@@ -37,18 +36,44 @@ export const Container = styled.div`
   }
 
   main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-
-    width: 736px;
-    height: 244px;
-
     border-top: 1px solid #333333;
     border-radius: 8px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    ::-webkit-scrollbar-track {
+      background: #808080;
+    }
+    ::-webkit-scrollbar {
+        width: 4px;
+        background: #808080;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #F2F2F2;
+    }
+    .no-task {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
 
+      margin-top: 4rem;
+
+      width: 736px;
+      
+    }
+
+    .with-task {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+
+      width: 736px;
+      
+    }
+    
     h3 {
       color: #808080;
     }

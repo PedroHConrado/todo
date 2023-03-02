@@ -20,6 +20,7 @@ export function Task({ task, deleteTask, changeCheck}: TaskProps) {
               className="isCheck"
               size={17.45}
               color="#5E60CE"
+              onClick={() => changeCheck(task.id)}
             />
           </button>
           <span className="isCheck">{task.content}</span>

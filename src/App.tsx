@@ -1,7 +1,6 @@
 import { Dashboard } from "./components/Dashboard";
 import { Header } from "./components/Header";
 import { Input } from "./components/Input";
-import { Task } from "./components/Task";
 
 import { GlobalStyle } from "./styles/global";
 
@@ -13,8 +12,6 @@ export interface ITask {
   content: string;
   isCheck: boolean;
 }
-
-const tasks: ITask[] = [];
 
 function App() {
   const [newTasks, setNewTasks] = useState<ITask[]>([]);
@@ -45,7 +42,6 @@ function App() {
       }
       return task;
     });
-    console.log(completedTasks)
     setNewTasks(completedTasks);
   }
 
